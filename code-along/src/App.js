@@ -1,11 +1,25 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 import writers from "./writers"
 import { ProfileCard } from './profileCard';
+import { useEffect, useState } from 'react';
 
 function App() {
-  return (
+  
+const [writers, setWriters] = useState([]);
+
+useEffect(() => {
+  const getWriters = async () => {
+    const response = await fetch("/writers.json");
+    const data = await response.json();
+    setWriters(data);
+  };
+  getWriters();
+}, []);
+
+
+return (
     <div>
       <h1>Writer Profiles</h1>
      <div className="container">
